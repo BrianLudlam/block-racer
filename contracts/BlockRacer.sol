@@ -9,14 +9,14 @@ import "./IBlockRacer.sol";
  * BlockRacer Contract
  * 
  * BlockRacer is a game allowing players (per Eth account) to compete against each
- * other, by racing racer tokens around a block-driven racetrack. Players win Eth by 
- * winning races, and potentially earn Eth by contributing to the settlement of race 
- * results. Racing performance is part skill in training, and part randomness determined 
- * by block hash creation over time. Racers increase level as they are trained, and 
- * are able to enter higher level races at higher levels. Higher level races cost more 
- * to enter and payout more to winners. Lower level races are more determined by 
- * randomness than training skill, and higher level races are more determined by training 
- * skill than randomness.
+ * other, by racing ERC721Entity tokens around a blockchain-mechanics-driven racetrack. 
+ * Players win Eth by winning races, and potentially earn Eth by contributing to 
+ * the settlement of race results. Racing performance is part skill in training, 
+ * and part randomness determined by block hash creation over time. Racers increase 
+ * level as they are trained, and are able to enter higher level races at higher levels. 
+ * Higher level races cost more to enter and payout more to winners. Lower level races are
+ * more determined by randomness than training skill, and higher level races are more 
+ * determined by training skill than randomness.
  * 
  * Racers
  * 
