@@ -81,8 +81,14 @@ interface IEntity {
      * @return from = Account transfering token ownership.
      * @return to = Account recieving token ownership.
      * @return tokenId = Token being transfered.
+     * @return timestamp
      */
-    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+    event Transfer(
+        address indexed from, 
+        address indexed to, 
+        uint256 indexed tokenId,
+        uint256 timestamp
+    );
     
     /**
      * Event Approval - Fired when token approval is given.
@@ -199,11 +205,13 @@ interface IEntity {
      * @return owner = entity owner
      * @return entity = entity id
      * @return spawner = entity spawner (spawnEntity caller)
+     * @return timestamp
      */
     event Spawned(
         address indexed owner, 
-        address indexed spawner, 
-        uint256 indexed entity
+        address indexed spawner,
+        uint256 indexed entity,
+        uint256 timestamp
     );
     
     /**
@@ -211,10 +219,12 @@ interface IEntity {
      * @return owner = entity owner
      * @return entity = entity id
      * @return name = new name
+     * @return timestamp
      */
     event NameChanged(
         address indexed owner, 
         uint256 indexed entity, 
-        string name
+        string name,
+        uint256 timestamp
     );
 }

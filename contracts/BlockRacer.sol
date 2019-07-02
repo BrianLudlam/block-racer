@@ -285,6 +285,7 @@ contract BlockRacer is IBlockRacer {
             owner, 
             id, 
             raceNumber, 
+            level,
             lane, 
             now
         );
@@ -295,6 +296,7 @@ contract BlockRacer is IBlockRacer {
             _raceQueue[level] = 0;//reset queue
             emit RaceStarted (
                 raceNumber, 
+                level,
                 _race[raceNumber].distance, 
                 _race[raceNumber].conditions,
                 now
@@ -336,7 +338,8 @@ contract BlockRacer is IBlockRacer {
             emit RaceExited(
                 owner, 
                 id, 
-                raceNumber, 
+                raceNumber,  
+                _race[raceNumber].level,
                 lane, 
                 now
             );
@@ -572,9 +575,11 @@ contract BlockRacer is IBlockRacer {
                 ownerAddress, 
                 _raceLane[raceNumber][lane].id, 
                 raceNumber, 
+                _race[raceNumber].level,
                 place, 
                 _raceLane[raceNumber][lane].split, 
                 _raceLane[raceNumber][lane].distance,
+                _raceLane[raceNumber][lane].exp,
                 now
             );
         }
@@ -608,16 +613,17 @@ contract BlockRacer is IBlockRacer {
                     finish[f] = lane;
                     placed = true;
                 } 
-                else if (split < _raceLane[raceNumber][finish[f]].split ||
-                    (split == _raceLane[raceNumber][finish[f]].split && 
+                //Leader has lowest split, or if equal, highest distance. 
+                //If split and distance equal, no change, tie goes to existing leader
+                else if (
+                    split < _raceLane[raceNumber][finish[f]].split ||
+                        (split == _raceLane[raceNumber][finish[f]].split && 
                         distance > _raceLane[raceNumber][finish[f]].distance)
                 ) {
                     //shift any prev finished lanes down first
                     l = LANE_COUNT-1;
                     while (l > f) {
-                        //if(finish[_l-1] != 0){
-                            finish[l] = finish[l-1];
-                        //}
+                        finish[l] = finish[l-1];
                         l--;
                     }
                     finish[f] = lane;
@@ -644,7 +650,9 @@ contract BlockRacer is IBlockRacer {
                 emit RaceFinished (
                     ownerAddress, 
                     _raceLane[raceNumber][lane].id, 
-                    raceNumber, 
+                    raceNumber,  
+                    _race[raceNumber].level,
+                    0,
                     0, 
                     0, 
                     0,

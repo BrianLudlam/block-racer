@@ -74,8 +74,14 @@ interface IERC721 {
      * @return from = Account transfering token ownership.
      * @return to = Account recieving token ownership.
      * @return tokenId = Token being transfered.
+     * @return timestamp
      */
-    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+    event Transfer(
+        address indexed from, 
+        address indexed to, 
+        uint256 indexed tokenId,
+        uint256 timestamp
+    );
     
     /**
      * Event Approval - Fired when token approval is given.
@@ -83,7 +89,11 @@ interface IERC721 {
      * @return approved = Account given approval for token.
      * @return tokenId = Token approval is given for.
      */
-    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
+    event Approval(
+        address indexed owner, 
+        address indexed approved, 
+        uint256 indexed tokenId
+    );
     
     /**
      * Event ApprovalForAll - Fired when owner's operator status changes
@@ -91,5 +101,9 @@ interface IERC721 {
      * @return operator = Operator account for owner.
      * @return approved = Boolean operator status.
      */
-    event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
+    event ApprovalForAll(
+        address indexed owner, 
+        address indexed operator, 
+        bool approved
+    );
 }

@@ -111,7 +111,8 @@ interface IERC721Entity {
     event Spawned(
         address indexed owner, 
         address indexed spawner,
-        uint256 indexed entity
+        uint256 indexed entity,
+        uint256 timestamp
     );
     
     /**
@@ -123,6 +124,7 @@ interface IERC721Entity {
     event NameChanged(
         address indexed owner, 
         uint256 indexed entity, 
-        string name
+        string name,
+        uint256 timestamp
     );
 }

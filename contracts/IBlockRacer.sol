@@ -211,12 +211,14 @@ interface IBlockRacer {
      * @return owner = address of racer owner
      * @return racer = IERC721Entity id, unique 256 bit
      * @return race = race number, unique 256 bit
+     * @return level = race level
      * @return lane = Racer's Lane # = 1 - 6
      */
     event RaceEntered (
         address indexed owner,
         uint256 indexed racer, 
         uint256 indexed race, 
+        uint16 level,
         uint8 lane,
         uint256 timestamp
     );
@@ -227,12 +229,14 @@ interface IBlockRacer {
      * @return owner = address of racer owner
      * @return racer = IERC721Entity id, unique 256 bit
      * @return race = race number, unique 256 bit
+     * @return level = race level
      * @return lane = Racer's previous lane # = 1 - 6
      */
     event RaceExited (
         address indexed owner, 
         uint256 indexed racer, 
         uint256 indexed race, 
+        uint16 level,
         uint8 lane,
         uint256 timestamp
     );
@@ -241,11 +245,13 @@ interface IBlockRacer {
      * Event RaceStarted - Fired during enterRaceQueue transaction, to signify 
      * the 6th racer has enter race queue at level, and race is started.
      * @return race = race number, unique 256 bit
+     * @return level = race level
      * @return distance = distance to finish line, determined by level.
      * @return conditions = race track conditions (0-255)
      */
     event RaceStarted (
-        uint indexed race, 
+        uint256 indexed race, 
+        uint16 level,
         uint32 distance,
         uint8 conditions,
         uint256 timestamp
@@ -262,7 +268,7 @@ interface IBlockRacer {
      */
     event LaneSettled (
         address indexed settler, 
-        uint indexed race, 
+        uint256 indexed race, 
         uint8 lane, 
         uint256 timestamp
     );
@@ -275,7 +281,7 @@ interface IBlockRacer {
      */
     event RaceSettled (
         address indexed settler, 
-        uint indexed race, 
+        uint256 indexed race, 
         uint256 timestamp
     );
     
@@ -285,18 +291,22 @@ interface IBlockRacer {
      * @return owner = address of racer owner
      * @return racer = IERC721Entity id, unique 256 bit
      * @return race = race number, unique 256 bit
+     * @return level = race level
      * @return place = Racer's resulting place in race finish 1st - 6th = 1 - 6
      * @return splits = Racer's resulting split "time" = 32 splits per block.
      * @return distance = Racer's resulting distance raced.
+     * @return exp = Experience gained during race.
      * @notice (total) distance / (total) splits = avg distance per split
      */
     event RaceFinished (
         address indexed owner, 
         uint256 indexed racer, 
         uint256 indexed race, 
+        uint16 level,
         uint8 place, 
         uint16 splits, 
         uint32 distance,
+        uint8 exp,
         uint256 timestamp
     );
     

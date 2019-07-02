@@ -238,7 +238,7 @@ contract ERC721Entity is ERC721, IERC721Entity {
         //switch *born* from birth block number to birth block timestamp
         _born[id] = now;
         msg.sender.transfer (SPAWN_FEE);
-        emit Spawned (ownerOf(id), msg.sender, id);
+        emit Spawned (ownerOf(id), msg.sender, id, now);
     }
     
     /**
@@ -250,7 +250,7 @@ contract ERC721Entity is ERC721, IERC721Entity {
     function nameEntity(uint256 entity, string calldata name) external {
         require (ownerOf(entity) == msg.sender);
         _name[entity] = toBytes32(bytes(name));//chop to 32 bytes
-        emit NameChanged (msg.sender, entity, string (abi.encodePacked(_name[entity])));
+        emit NameChanged (msg.sender, entity, string (abi.encodePacked(_name[entity])), now);
     }
     
     /**

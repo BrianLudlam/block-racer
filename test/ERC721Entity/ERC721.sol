@@ -130,7 +130,7 @@ contract ERC721 is IERC165, IERC721 {
         _ownerTotal[from]--;
         _ownerTotal[to]++;
         _owner[tokenId] = to;
-        emit Transfer(from, to, tokenId);
+        emit Transfer(from, to, tokenId, now);
     }
 
      /**
@@ -191,6 +191,6 @@ contract ERC721 is IERC165, IERC721 {
         tokenId = ++_tokenIndex;
         _owner[tokenId] = owner;
         _ownerTotal[owner]++;
-        emit Transfer(address(0), owner, tokenId);
+        emit Transfer(address(0), owner, tokenId, now);
     }
 }
